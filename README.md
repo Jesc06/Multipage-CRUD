@@ -51,7 +51,7 @@ namespace Asp.NetCore_MVC_Practice.Models
 
 1. View for table 
 
-![Step 1](docTable.png)
+![Step 1](docTable.png) 
 
 <br>
 
