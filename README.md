@@ -5,7 +5,7 @@ A step-by-step guide to building Create, Read, Update, and Delete (CRUD) functio
 <br> 
           
      
-### 1. Create Model
+### 1. Create Model 
 
 ```csharp
 using System.ComponentModel;
