@@ -51,18 +51,148 @@ namespace Asp.NetCore_MVC_Practice.Models
 
 1. View for table 
 
-![Step 1](docTable.png) 
+
+
+```cshtml
+@{
+    ViewData["Title"] = "Student Info";
+}
+@model List<DbTable>
+
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
+                <th scope="col">Lastname</th>
+                <th scope="col">Age</th>
+                <th scope="col">Edit</th>
+                <th scope="col">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var info in Model)
+            {
+                <tr>
+                    <td>@info.Id</td>
+                    <td>@info.Name</td>
+                    <td>@info.Lastname</td>
+                    <td>@info.age</td>
+                    <td> <a asp-controller="StudentInfo" asp-action="Edit" asp-route-id="@info.Id" class="btn btn-warning btn-sm">Edit</a> </td>
+                    <td>
+                        <form asp-controller="StudentInfo" asp-action="Delete" asp-route-id="@info.Id" method="post" style="display:inline;">
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+```
+
+
 
 <br>
 
 2. View for  Add data
 
-![Step 1](adddata.png)
+
+
+```cshtml
+@model DbTable
+
+<form method="post" asp-controller="StudentInfo" asp-action="add">
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div class="border p-4 mt-4 rounded">
+        <div class="row pb-3">
+            <h2 class="text-primary">Student Info</h2>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Name" class="form-label">Name</label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Lastname" class="form-label">Lastname</label>
+            <input asp-for="Lastname" class="form-control" />
+            <span asp-validation-for="Lastname" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="age" class="form-label">Age</label>
+            <input asp-for="age" class="form-control" />
+            <span asp-validation-for="age" class="text-danger"></span>
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                <button type="submit" class="btn btn-primary form-control">Add Student</button>
+            </div>
+            <div class="col-6">
+                <a asp-controller="StudentInfo" asp-action="Index" class="btn btn-secondary form-control">Back</a>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+```
+
+
+
 
 
 3. View for Edit
 
-![Step 1](DocEdit.png)
+
+
+```cshtml
+@model DbTable
+
+<form method="post">
+
+	<div asp-validation-summary="All" class="validate"></div>
+
+	<div class="border p-3 mt-4">
+		<div class="row pb-2">
+			<h2 class="text-primary">Edit Student Info</h2>
+		</div>
+	</div>
+
+	<div class="mb-3">
+		<label>Name</label>
+		<input asp-for="Name" class="form-control" />
+		<span asp-validation-for="Name" class="text-danger"></span>
+	</div>
+
+	<div class="mb-3">
+		<label>Lastname</label>
+		<input asp-for="Lastname" class="form-control" />
+		<span asp-validation-for="Lastname" class="text-danger"></span>
+	</div>
+
+	<div class="mb-3">
+		<label>Age</label>
+		<input asp-for="age" class="form-control" />
+		<span asp-validation-for="age" class="text-danger"></span>
+	</div>
+
+	<div class="row">
+		<div class="col-6">
+			<button type="submit" class="btn btn-primary form-control">Update Student</button>
+		</div>
+	</div>
+
+</form>
+
+
+```
+
 
 
 <br>
@@ -73,8 +203,16 @@ namespace Asp.NetCore_MVC_Practice.Models
    
 Place this code above the table section to ensure it works properly.
 
- ![Step 1](DocSearch.png)  
 
+```cshtml
+
+<form asp-controller="StudentInfo" asp-action="Search" method="post">
+	<input type="text" name="Searchstring"/>
+	<input type="submit" value="Search" />
+</form>
+
+
+```
 
 
 <br>
